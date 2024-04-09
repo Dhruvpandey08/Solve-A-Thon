@@ -1,5 +1,9 @@
 import React from "react";
-const login = () => {
+export default function Login () {
+  function verifyUser(){
+    window.location.replace("/dashboard");
+  }
+
   return (
     <div className="h-[100vh] items-center flex justify-center px-5 lg:px-0">
       <div className="max-w-screen-xl bg-white border shadow sm:rounded-lg flex justify-center flex-1">
@@ -33,7 +37,7 @@ const login = () => {
                   type="password"
                   placeholder="Password"
                 />
-                <button className="mt-5 tracking-wide font-semibold bg-blue-900 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
+                <button onClick={verifyUser} className="mt-5 tracking-wide font-semibold bg-blue-900 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
                   <svg
                     className="w-6 h-6 -ml-2"
                     fill="none"
@@ -62,4 +66,3 @@ const login = () => {
     </div>
   );
 };
-export default login;
