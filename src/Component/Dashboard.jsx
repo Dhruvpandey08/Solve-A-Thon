@@ -70,9 +70,8 @@ export default function DashBoard() {
             <div className='mt-5 mb-5'> Curr Temp Is {temp} </div>
 
             <div className='flex flex-wrap'>
-                <iframe width="500" height="250" src="https://thingspeak.com/channels/2500037/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=4&type=line&update=15"></iframe>;
-                {/* {/* <iframe width="860" height="484" src="https://thingspeak.com/channels/2500037/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>; */}
-                <iframe width="500" height="250" src="https://thingspeak.com/channels/2500037/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=4&type=line&update=15"></iframe>; 
+                <iframe width="500" height="250" src="https://thingspeak.com/channels/2440815/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=6&type=line&update=1"></iframe>;
+                <iframe width="500" height="250" src="https://thingspeak.com/channels/2440815/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=6&type=line&update=1"></iframe>; 
             </div>
 
         </div>
