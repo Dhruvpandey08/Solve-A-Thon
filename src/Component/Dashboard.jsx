@@ -1,6 +1,8 @@
 import React from 'react'
+import { useEffect,useState } from 'react';
 
 export default function DashBoard() {
+  const [temp,setTemp]=useState(0);
 
   function loadCoolerData() {
     console.log("Loading")
@@ -16,6 +18,15 @@ export default function DashBoard() {
         coolerSelect.disabled = true;
     }
   }
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+        setTemp((temp)=>temp+1);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
 
   
   return (
@@ -50,8 +61,18 @@ export default function DashBoard() {
                 </select>
             </div>
             <button className="font-thin bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded transition duration-300">Submit</button>
+            
+            <div className='mt-5 mb-5'> Curr Temp Is {temp} </div>
+
+            <div className='flex flex-wrap'>
+                <iframe width="500" height="250" src="https://thingspeak.com/channels/2500037/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=4&type=line&update=15"></iframe>;
+                {/* {/* <iframe width="860" height="484" src="https://thingspeak.com/channels/2500037/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>; */}
+                <iframe width="500" height="250" src="https://thingspeak.com/channels/2500037/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=4&type=line&update=15"></iframe>; 
+            </div>
+
         </div>
     </div> 
+
     </>
   )
 }
