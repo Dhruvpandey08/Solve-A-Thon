@@ -4,6 +4,9 @@ import { useEffect,useState } from 'react';
 
 export default function DashBoard() {
     const [flag,setflag] = useState(false);
+    const [temp,setTemp]= useState(0);
+    const [tds,setTds]= useState(0);
+    const [turbidity,setTurbidity]= useState(0);
 
     function loadCoolerData() {
         const floor = document.getElementById('floorSelect').value ;
@@ -30,10 +33,10 @@ export default function DashBoard() {
     const interval = setInterval(async () => {
         const response = await fetch('https://api.thingspeak.com/channels/2440815/feeds.json?api_key=E45MWGDEG7W6I3WR&results=1');
         const data=await response.json();
-        console.log(data.feeds[0].field1);
-        console.log(data.feeds[0].field2);
-        console.log(data.feeds[0].field3);
-    }, 5000);
+        setTemp(data.feeds[0].field1);
+        setTurbidity(data.feeds[0].field2);
+        setTds(data.feeds[0].field3);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, []);
@@ -49,15 +52,9 @@ export default function DashBoard() {
                     <img src="images/logo.png" alt="Logo" className="h-20 w-auto" />
                     <p className="text-3xl ml-2 text-center">Water Quality Monitoring</p>
                 </div>
-<<<<<<< HEAD
-                <a href="#" className="text-2xl block m-3 ml-2"><i icon="fas fa-home"></i> Home</a>
-                <a href="#" className="text-2xl block m-3 ml-2"><i icon="fas fa-bell"></i> Alerts</a>
-                <a href="#" className="text-2xl block m-3 ml-2"><i icon="fas fa-envelope"></i> Contact</a>
-=======
                 <a href="#" className="text-2xl block m-3 ml-2 text-center"><i className="fas fa-home"></i> Home</a>
                 <a href="#" className="text-2xl block m-3 ml-2 text-center"><i className="fas fa-bell"></i> Alerts</a>
                 <a href="#" className="text-2xl block m-3 ml-2 text-center"><i className="fas fa-envelope"></i> Contact</a>
->>>>>>> 9b5beea19c508905db6e35063fd5e7fdf54c0e5d
             </div>
         </div>
         
@@ -83,13 +80,29 @@ export default function DashBoard() {
             flag && <>
             <div className='flex flex-wrap mt-5 '>
                 <div className='flex border-solid border-2 border-green-100 w-60 h-28 mr-2 rounded-md'>
-                    <div className='font-thin'>Temprature</div>   
+                    <div className='font-thin'>
+                        Temprature
+                        <div>
+                            {temp}
+                        </div>
+                    </div>   
                 </div>
                 <div className='border-solid border-2 border-green-100 w-60 h-28 mr-2 rounded-md'>
-                    Box1
+                <div className='font-thin'>
+                        Turbidity
+                        <div>
+                            {turbidity}
+                        </div>
+                    </div>   
                 </div>
+
                 <div className='border-solid border-2 border-green-100 w-60 h-28 rounded-md'>
-                    Box1
+                   <div className='font-thin'>
+                        TDS
+                        <div>
+                            {tds}
+                        </div>
+                    </div>   
                 </div>
             </div>
 
