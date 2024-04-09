@@ -3,21 +3,25 @@ import React from 'react'
 import { useEffect,useState } from 'react';
 
 export default function DashBoard() {
-  const [temp,setTemp]=useState(0);
+    const [temp,setTemp]=useState(0);
+    const [flag,setflag] = useState(false);
 
-  function loadCoolerData() {
-    console.log("Loading")
-    const floor = document.getElementById('floorSelect').value ;
-    var coolerSelect = document.getElementById('coolerSelect');
-    coolerSelect.innerHTML = '';
-    if (floor) {
-        coolerSelect.innerHTML = '<option value="">' + '--Select a cooler--' + '</option>' +
-                                 '<option value="' + floor + 'A">' + 'Cooler ' + floor + 'A' + '</option>' +
-                                 '<option value="' + floor + 'B">' + 'Cooler ' + floor + 'B' + '</option>';
-        coolerSelect.disabled = false;
-    } else {
-        coolerSelect.disabled = true;
-    }
+    function loadCoolerData() {
+        const floor = document.getElementById('floorSelect').value ;
+        var coolerSelect = document.getElementById('coolerSelect');
+        coolerSelect.innerHTML = '';
+        if (floor) {
+            coolerSelect.innerHTML = '<option value="">' + '--Select a cooler--' + '</option>' +
+                                    '<option value="' + floor + 'A">' + 'Cooler ' + floor + 'A' + '</option>' +
+                                    '<option value="' + floor + 'B">' + 'Cooler ' + floor + 'B' + '</option>';
+            coolerSelect.disabled = false;
+        } else {
+            coolerSelect.disabled = true;
+        }
+  }
+
+  function showData(){
+    setflag(true);
   }
 
   useEffect(() => {
@@ -28,7 +32,7 @@ export default function DashBoard() {
         console.log(data.feeds[0].field2);
         console.log(data.feeds[0].field3);
         setTemp((temp)=>temp+1);
-    }, 10000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, []);
@@ -38,7 +42,6 @@ export default function DashBoard() {
   return (
     <>  
     <div className="flex min-h-screen font-thin">
-        
         <div className="w-1/5 bg-teal-800 text-white font-thin">
             <div className="p-4">
                 <div className="flex flex-wrap items-center justify-center">
@@ -67,16 +70,17 @@ export default function DashBoard() {
                 <select id="coolerSelect" disabled className="border border-gray-300 rounded-md p-2 ml-2">
                 </select>
             </div>
-            <button className="font-thin bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded transition duration-300">Submit</button>
+            <button onClick={showData} className="font-thin bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded transition duration-300">Submit</button>
             
-            <div className='mt-5 mb-5'> Curr Temp Is {temp} </div>
+            {
+            flag && <> <div className='mt-5 mb-5'> Curr Temp Is {temp} </div>
 
-            <div className='flex flex-wrap'>
-                <iframe width="500" height="250" src="https://thingspeak.com/channels/2440815/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=6&type=line&update=1"></iframe>
-                <iframe width="500" height="250" src="https://thingspeak.com/channels/2440815/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=6&type=line&update=1"></iframe> 
-                <iframe width="500" height="250" src="https://thingspeak.com/channels/2440815/charts/3?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=6&type=line&update=1"></iframe> 
-            </div>
-
+                <div className='flex flex-wrap'>
+                    <iframe  width="500" height="250" src="https://thingspeak.com/channels/2440815/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=6&type=line&update=10"></iframe>
+                    <iframe  width="500" height="250" src="https://thingspeak.com/channels/2440815/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=6&type=line&update=10"></iframe> 
+                    <iframe  width="500" height="250" src="https://thingspeak.com/channels/2440815/charts/3?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=6&type=line&update=10"></iframe> 
+                </div> </>
+            }
         </div>
     </div> 
 

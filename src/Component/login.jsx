@@ -21,7 +21,7 @@ export default function Login () {
               <h1 className="text-2xl xl:text-4xl font-extrabold text-blue-900">
                 Sign In
               </h1>
-              <p className="text-[12px] text-gray-500">
+              <p className="text-[12px] text-gray-800 mt-6">
                 Hey enter your details to login into your account
               </p>
             </div>
