@@ -105,12 +105,14 @@ export default function DashBoard() {
                     </div>   
                 </div>
             </div>
-
-                <div className='flex flex-wrap'>
-                    <iframe  width="500" height="250" src="https://thingspeak.com/channels/2440815/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=6&type=line&update=10"></iframe>
-                    <iframe  width="500" height="250" src="https://thingspeak.com/channels/2440815/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=6&type=line&update=10"></iframe> 
-                    <iframe  width="500" height="250" src="https://thingspeak.com/channels/2440815/charts/3?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=6&type=line&update=10"></iframe> 
-                </div> </>
+            <br></br>
+            <div className='flex flex-wrap'>
+                <div className="iframe-container border-2 border-gray-500 rounded-md overflow-hidden flex flex-wrap">
+                    <iframe width="500" height="250" src="https://thingspeak.com/channels/2440815/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=6&type=line&update=10"></iframe>
+                    <iframe width="500" height="250" src="https://thingspeak.com/channels/2440815/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=6&type=line&update=10"></iframe>
+                    <iframe width="500" height="250" src="https://thingspeak.com/channels/2440815/charts/3?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=6&type=line&update=10"></iframe>
+                </div>
+            </div> </>
             }
         </div>
     </div> 
