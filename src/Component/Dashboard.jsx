@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React from 'react'
 import { useEffect,useState } from 'react';
 
@@ -36,16 +37,17 @@ export default function DashBoard() {
   
   return (
     <>  
-    <div className="flex h-screen font-thin">
-        <div className="w-1/5 bg-green-800 text-white font-thin">
+    <div className="flex min-h-screen font-thin">
+        
+        <div className="w-1/5 bg-teal-800 text-white font-thin">
             <div className="p-4">
-                <div className="flex flex-wrap items-center">
-                    <img src="images/logo.png" alt="Logo" className="h-20 w-auto"/>
-                    <p className="text-3xl ml-2">Water Quality Monitoring</p>
+                <div className="flex flex-wrap items-center justify-center">
+                    <img src="images/logo.png" alt="Logo" className="h-20 w-auto" />
+                    <p className="text-3xl ml-2 text-center">Water Quality Monitoring</p>
                 </div>
-                <a href="#" className="text-2xl block m-3 ml-2"><i className="fas fa-home"></i> Home</a>
-                <a href="#" className="text-2xl block m-3 ml-2"><i className="fas fa-bell"></i> Alerts</a>
-                <a href="#" className="text-2xl block m-3 ml-2"><i className="fas fa-envelope"></i> Contact</a>
+                <a href="#" className="text-2xl block m-3 ml-2 text-center"><i className="fas fa-home"></i> Home</a>
+                <a href="#" className="text-2xl block m-3 ml-2 text-center"><i className="fas fa-bell"></i> Alerts</a>
+                <a href="#" className="text-2xl block m-3 ml-2 text-center"><i className="fas fa-envelope"></i> Contact</a>
             </div>
         </div>
         
@@ -70,8 +72,9 @@ export default function DashBoard() {
             <div className='mt-5 mb-5'> Curr Temp Is {temp} </div>
 
             <div className='flex flex-wrap'>
-                <iframe width="500" height="250" src="https://thingspeak.com/channels/2440815/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=6&type=line&update=1"></iframe>;
-                <iframe width="500" height="250" src="https://thingspeak.com/channels/2440815/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=6&type=line&update=1"></iframe>; 
+                <iframe width="500" height="250" src="https://thingspeak.com/channels/2440815/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=6&type=line&update=1"></iframe>
+                <iframe width="500" height="250" src="https://thingspeak.com/channels/2440815/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=6&type=line&update=1"></iframe> 
+                <iframe width="500" height="250" src="https://thingspeak.com/channels/2440815/charts/3?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=6&type=line&update=1"></iframe> 
             </div>
 
         </div>
