@@ -49,15 +49,9 @@ export default function DashBoard() {
                     <img src="images/logo.png" alt="Logo" className="h-20 w-auto" />
                     <p className="text-3xl ml-2 text-center">Water Quality Monitoring</p>
                 </div>
-<<<<<<< HEAD
-                <a href="#" className="text-2xl block m-3 ml-2"><i icon="fas fa-home"></i> Home</a>
-                <a href="#" className="text-2xl block m-3 ml-2"><i icon="fas fa-bell"></i> Alerts</a>
-                <a href="#" className="text-2xl block m-3 ml-2"><i icon="fas fa-envelope"></i> Contact</a>
-=======
-                <a href="#" className="text-2xl block m-3 ml-2 text-center"><i className="fas fa-home"></i> Home</a>
-                <a href="#" className="text-2xl block m-3 ml-2 text-center"><i className="fas fa-bell"></i> Alerts</a>
-                <a href="#" className="text-2xl block m-3 ml-2 text-center"><i className="fas fa-envelope"></i> Contact</a>
->>>>>>> 9b5beea19c508905db6e35063fd5e7fdf54c0e5d
+                <a href="#" className="text-2xl block m-3 ml-2 text-center mt-5"><i className="fas fa-home"></i> Home</a>
+                <a href="#" className="text-2xl block m-3 ml-2 text-center mt-5"><i className="fas fa-bell"></i> Alerts</a>
+                <a href="#" className="text-2xl block m-3 ml-2 text-center mt-5"><i className="fas fa-envelope"></i> Contact</a>
             </div>
         </div>
         
@@ -82,22 +76,24 @@ export default function DashBoard() {
             {
             flag && <>
             <div className='flex flex-wrap mt-5 '>
-                <div className='flex border-solid border-2 border-green-100 w-60 h-28 mr-2 rounded-md'>
-                    <div className='font-thin'>Temprature</div>   
+                <div className='flex border-solid border-2 border-gray-500 w-80 h-44 mr-2 rounded-md'>
+                    <div className='font-bold ml-1'>Temperature</div>   
                 </div>
-                <div className='border-solid border-2 border-green-100 w-60 h-28 mr-2 rounded-md'>
-                    Box1
+                <div className='border-solid border-2 border-gray-500 w-80 h-44 mr-2 rounded-md'>
+                    <div className='font-bold ml-1'>Turbidity</div>   
                 </div>
-                <div className='border-solid border-2 border-green-100 w-60 h-28 rounded-md'>
-                    Box1
+                <div className='border-solid border-2 border-gray-500 w-80 h-44 rounded-md'>
+                    <div className='font-bold ml-1'>TDS</div>   
                 </div>
             </div>
-
-                <div className='flex flex-wrap'>
-                    <iframe  width="500" height="250" src="https://thingspeak.com/channels/2440815/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=6&type=line&update=10"></iframe>
-                    <iframe  width="500" height="250" src="https://thingspeak.com/channels/2440815/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=6&type=line&update=10"></iframe> 
-                    <iframe  width="500" height="250" src="https://thingspeak.com/channels/2440815/charts/3?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=6&type=line&update=10"></iframe> 
-                </div> </>
+            <br></br>
+            <div className='flex flex-wrap'>
+                <div className="iframe-container border-2 border-gray-500 rounded-md overflow-hidden flex flex-wrap">
+                    <iframe width="500" height="250" src="https://thingspeak.com/channels/2440815/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=6&type=line&update=10"></iframe>
+                    <iframe width="500" height="250" src="https://thingspeak.com/channels/2440815/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=6&type=line&update=10"></iframe>
+                    <iframe width="500" height="250" src="https://thingspeak.com/channels/2440815/charts/3?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=6&type=line&update=10"></iframe>
+                </div>
+            </div> </>
             }
         </div>
     </div> 
