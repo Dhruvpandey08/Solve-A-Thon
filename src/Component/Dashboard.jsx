@@ -3,7 +3,6 @@ import React from 'react'
 import { useEffect,useState } from 'react';
 
 export default function DashBoard() {
-    const [temp,setTemp]=useState(0);
     const [flag,setflag] = useState(false);
 
     function loadCoolerData() {
@@ -23,6 +22,9 @@ export default function DashBoard() {
   function showData(){
     setflag(true);
   }
+  function toggle(){
+    setflag(false);
+  }
 
   useEffect(() => {
     const interval = setInterval(async () => {
@@ -31,7 +33,6 @@ export default function DashBoard() {
         console.log(data.feeds[0].field1);
         console.log(data.feeds[0].field2);
         console.log(data.feeds[0].field3);
-        setTemp((temp)=>temp+1);
     }, 5000);
 
     return () => clearInterval(interval);
@@ -48,9 +49,15 @@ export default function DashBoard() {
                     <img src="images/logo.png" alt="Logo" className="h-20 w-auto" />
                     <p className="text-3xl ml-2 text-center">Water Quality Monitoring</p>
                 </div>
+<<<<<<< HEAD
+                <a href="#" className="text-2xl block m-3 ml-2"><i icon="fas fa-home"></i> Home</a>
+                <a href="#" className="text-2xl block m-3 ml-2"><i icon="fas fa-bell"></i> Alerts</a>
+                <a href="#" className="text-2xl block m-3 ml-2"><i icon="fas fa-envelope"></i> Contact</a>
+=======
                 <a href="#" className="text-2xl block m-3 ml-2 text-center"><i className="fas fa-home"></i> Home</a>
                 <a href="#" className="text-2xl block m-3 ml-2 text-center"><i className="fas fa-bell"></i> Alerts</a>
                 <a href="#" className="text-2xl block m-3 ml-2 text-center"><i className="fas fa-envelope"></i> Contact</a>
+>>>>>>> 9b5beea19c508905db6e35063fd5e7fdf54c0e5d
             </div>
         </div>
         
@@ -67,13 +74,24 @@ export default function DashBoard() {
             </div>
             <div className="mb-4">
                 <label for="coolerSelect" className="font-thin text-2xl">Water Cooler:</label>
-                <select id="coolerSelect" disabled className="border border-gray-300 rounded-md p-2 ml-2">
+                <select onChange={toggle} id="coolerSelect" disabled className="border border-gray-300 rounded-md p-2 ml-2">
                 </select>
             </div>
             <button onClick={showData} className="font-thin bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded transition duration-300">Submit</button>
             
             {
-            flag && <> <div className='mt-5 mb-5'> Curr Temp Is {temp} </div>
+            flag && <>
+            <div className='flex flex-wrap mt-5 '>
+                <div className='flex border-solid border-2 border-green-100 w-60 h-28 mr-2 rounded-md'>
+                    <div className='font-thin'>Temprature</div>   
+                </div>
+                <div className='border-solid border-2 border-green-100 w-60 h-28 mr-2 rounded-md'>
+                    Box1
+                </div>
+                <div className='border-solid border-2 border-green-100 w-60 h-28 rounded-md'>
+                    Box1
+                </div>
+            </div>
 
                 <div className='flex flex-wrap'>
                     <iframe  width="500" height="250" src="https://thingspeak.com/channels/2440815/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=6&type=line&update=10"></iframe>
