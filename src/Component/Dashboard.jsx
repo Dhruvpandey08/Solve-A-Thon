@@ -20,14 +20,14 @@ export default function DashBoard() {
   }
 
   useEffect(() => {
-    // const interval = setInterval(async () => {
-    //     const response = await fetch('https://api.thingspeak.com/channels/2440815/feeds.json?api_key=E45MWGDEG7W6I3WR&results=1');
-    //     const data=await response.json();
-    //     console.log(data.feeds[0].field1);
-    //     console.log(data.feeds[0].field2);
-    //     console.log(data.feeds[0].field3);
-    //     setTemp((temp)=>temp+1);
-    // }, 10000);
+    const interval = setInterval(async () => {
+        const response = await fetch('https://api.thingspeak.com/channels/2440815/feeds.json?api_key=E45MWGDEG7W6I3WR&results=1');
+        const data=await response.json();
+        console.log(data.feeds[0].field1);
+        console.log(data.feeds[0].field2);
+        console.log(data.feeds[0].field3);
+        setTemp((temp)=>temp+1);
+    }, 10000);
 
     return () => clearInterval(interval);
   }, []);
