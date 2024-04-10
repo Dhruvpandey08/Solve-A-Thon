@@ -103,7 +103,7 @@ export default function DashBoard() {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, []);
+  });
 
 
   
