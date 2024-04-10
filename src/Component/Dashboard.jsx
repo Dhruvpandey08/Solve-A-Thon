@@ -1,12 +1,24 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react'
 import { useEffect,useState } from 'react';
+import useSound from 'use-sound';
+import Alert from './Alert.mp3'
 
 export default function DashBoard() {
     const [flag,setflag] = useState(false);
     const [temp,setTemp]= useState(0);
     const [tds,setTds]= useState(0);
     const [turbidity,setTurbidity]= useState(0);
+    const [play,{ stop }] = useSound(Alert);
+
+    function playAlert() {
+        play();
+    }
+
+    function stopAlert() {
+        stop();
+    }
+
 
     function loadCoolerData() {
         const floor = document.getElementById('floorSelect').value ;
@@ -30,28 +42,65 @@ export default function DashBoard() {
   }
 
   useEffect(() => {
+
     const interval = setInterval(async () => {
         const response = await fetch('https://api.thingspeak.com/channels/2440815/feeds.json?api_key=E45MWGDEG7W6I3WR&results=1');
         const data=await response.json();
         const tempContainer = document.getElementById('tempCnt');
+        const turbidityContainer = document.getElementById('turbidityCnt');
+        const tdsContainer = document.getElementById('tdsCnt');
         setTemp(data.feeds[0].field1);
         setTurbidity(data.feeds[0].field2);
         setTds(data.feeds[0].field3);
-        
-        if(data.feeds[0].field1>=28){
+
+        if(data.feeds[0].field1>=32)
+        {
             if(tempContainer.classList.contains('border-green-600')){
                 tempContainer.classList.remove('border-green-600');
             }
             tempContainer.classList.add('border-red-600');
+            playAlert();
+            setTimeout(stopAlert,2000);
         }else{
             if(tempContainer.classList.contains('border-red-600')){
                 tempContainer.classList.remove('border-red-600');
+                
             }
-
             tempContainer.classList.add('border-green-600');
         }
 
-    }, 2000);
+        if(data.feeds[0].field2<2 || data.feeds[0].field2>5)
+        {
+            if(turbidityContainer.classList.contains('border-green-600')){
+                turbidityContainer.classList.remove('border-green-600');
+            }
+            turbidityContainer.classList.add('border-red-600');
+            playAlert();
+            setTimeout(stopAlert,2000);
+        }else{
+            if(turbidityContainer.classList.contains('border-red-600')){
+                turbidityContainer.classList.remove('border-red-600');
+                
+            }
+            turbidityContainer.classList.add('border-green-600');
+        }
+
+        if(data.feeds[0].field3<50 || data.feeds[0].field3>220)
+        {
+            if(tdsContainer.classList.contains('border-green-600')){
+                tdsContainer.classList.remove('border-green-600');
+            }
+            tdsContainer.classList.add('border-red-600');
+            playAlert();
+            setTimeout(stopAlert,2000);
+        }else{
+            if(tdsContainer.classList.contains('border-red-600')){
+                tdsContainer.classList.remove('border-red-600');
+                
+            }
+            tdsContainer.classList.add('border-green-600');
+        }
+    }, 3000);
 
     return () => clearInterval(interval);
   }, []);
@@ -97,14 +146,14 @@ export default function DashBoard() {
                 <div id="tempCnt" className='flex border-solid border-2 border-green-600 w-80 h-44 mr-2 rounded-md'>
                     <div className='font-bold ml-1'>
                         Temperature (°C)
-                    <div className='font-thin ml-1 text-6xl mt-2'>{temp}</div> </div> 
+                    <div className='font-thin ml-1 text-6xl mt-2'>{temp}</div></div> 
                 </div>
-                <div className='border-solid border-2 border-gray-500 w-80 h-44 mr-2 rounded-md'>
-                    <div className='font-bold ml-1'>Turbidity  
+                <div id="turbidityCnt" className='border-solid border-2 border-gray-500 w-80 h-44 mr-2 rounded-md'>
+                    <div className='font-bold ml-1'>Turbidity (NTU) 
                     <div className='font-thin ml-1 text-6xl mt-2'>{turbidity}</div></div>
                 </div>
-                <div className='border-solid border-2 border-gray-500 w-80 h-44 mr-2 rounded-md'>
-                    <div className='font-bold ml-1'>TDS
+                <div id="tdsCnt" className='border-solid border-2 border-gray-500 w-80 h-44 mr-2 rounded-md'>
+                    <div className='font-bold ml-1'>TDS (PPM)
                     <div className='font-thin ml-1 text-6xl mt-2'>{tds}</div></div>
                 </div>
             </div>
@@ -123,17 +172,3 @@ export default function DashBoard() {
     </>
   )
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
