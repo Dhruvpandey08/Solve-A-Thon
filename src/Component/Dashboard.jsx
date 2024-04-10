@@ -8,7 +8,6 @@ export default function DashBoard() {
     const [tds,setTds]= useState(0);
     const [turbidity,setTurbidity]= useState(0);
 
-
     function loadCoolerData() {
         const floor = document.getElementById('floorSelect').value ;
         var coolerSelect = document.getElementById('coolerSelect');
@@ -34,12 +33,54 @@ export default function DashBoard() {
     const interval = setInterval(async () => {
         const response = await fetch('https://api.thingspeak.com/channels/2440815/feeds.json?api_key=E45MWGDEG7W6I3WR&results=1');
         const data=await response.json();
+        const tempContainer = document.getElementById('tempCnt');
+        const turbidityContainer = document.getElementById('turbidityCnt');
+        const tdsContainer = document.getElementById('tdsCnt');
         setTemp(data.feeds[0].field1);
         setTurbidity(data.feeds[0].field2);
         setTds(data.feeds[0].field3);
-        console.log(data.feeds[0].field1);
-        console.log(data.feeds[0].field2);
-        console.log(data.feeds[0].field3);
+
+        if(data.feeds[0].field1>=31)
+        {
+            if(tempContainer.classList.contains('border-green-600')){
+                tempContainer.classList.remove('border-green-600');
+            }
+            tempContainer.classList.add('border-red-600');
+        }else{
+            if(tempContainer.classList.contains('border-red-600')){
+                tempContainer.classList.remove('border-red-600');
+                
+            }
+            tempContainer.classList.add('border-green-600');
+        }
+
+        if(data.feeds[0].field2>=1500)
+        {
+            if(turbidityContainer.classList.contains('border-green-600')){
+                turbidityContainer.classList.remove('border-green-600');
+            }
+            turbidityContainer.classList.add('border-red-600');
+        }else{
+            if(turbidityContainer.classList.contains('border-red-600')){
+                turbidityContainer.classList.remove('border-red-600');
+                
+            }
+            turbidityContainer.classList.add('border-green-600');
+        }
+
+        if(data.feeds[0].field3>=220)
+        {
+            if(tdsContainer.classList.contains('border-green-600')){
+                tdsContainer.classList.remove('border-green-600');
+            }
+            tdsContainer.classList.add('border-red-600');
+        }else{
+            if(tdsContainer.classList.contains('border-red-600')){
+                tdsContainer.classList.remove('border-red-600');
+                
+            }
+            tdsContainer.classList.add('border-green-600');
+        }
     }, 3000);
 
     return () => clearInterval(interval);
@@ -56,9 +97,9 @@ export default function DashBoard() {
                     <img src="images/logo.png" alt="Logo" className="h-20 w-auto" />
                     <p className="text-3xl ml-2 text-center">Water Quality Monitoring</p>
                 </div>
-                <a href="#" className="text-2xl block m-3 ml-2 text-center mt-5"><i className="fas fa-home"></i> Home</a>
-                <a href="#" className="text-2xl block m-3 ml-2 text-center mt-5"><i className="fas fa-bell"></i> Alerts</a>
-                <a href="#" className="text-2xl block m-3 ml-2 text-center mt-5"><i className="fas fa-envelope"></i> Contact</a>
+                <a href="#" className="text-2xl block m-3 ml-2 text-center"><i className="fas fa-home"></i> Home</a>
+                <a href="#" className="text-2xl block m-3 ml-2 text-center"><i className="fas fa-bell"></i> Alerts</a>
+                <a href="#" className="text-2xl block m-3 ml-2 text-center"><i className="fas fa-envelope"></i> Contact</a>
             </div>
         </div>
         
@@ -83,17 +124,17 @@ export default function DashBoard() {
             {
             flag && <>
             <div className='flex flex-wrap mt-5 '>
-                <div className='flex border-solid border-2 border-gray-500 w-80 h-44 mr-2 rounded-md'>
+                <div id="tempCnt" className='flex border-solid border-2 border-green-600 w-80 h-44 mr-2 rounded-md'>
                     <div className='font-bold ml-1'>
-                        Temperature 
-                    <div className='font-thin ml-1 text-6xl mt-2'>{temp}</div> </div> 
+                        Temperature (°C)
+                    <div className='font-thin ml-1 text-6xl mt-2'>{temp}</div></div> 
                 </div>
-                <div className='border-solid border-2 border-gray-500 w-80 h-44 mr-2 rounded-md'>
-                    <div className='font-bold ml-1'>Turbidity  
+                <div id="turbidityCnt" className='border-solid border-2 border-gray-500 w-80 h-44 mr-2 rounded-md'>
+                    <div className='font-bold ml-1'>Turbidity (NTU) 
                     <div className='font-thin ml-1 text-6xl mt-2'>{turbidity}</div></div>
                 </div>
-                <div className='border-solid border-2 border-gray-500 w-80 h-44 mr-2 rounded-md'>
-                    <div className='font-bold ml-1'>TDS
+                <div id="tdsCnt" className='border-solid border-2 border-gray-500 w-80 h-44 mr-2 rounded-md'>
+                    <div className='font-bold ml-1'>TDS (PPM)
                     <div className='font-thin ml-1 text-6xl mt-2'>{tds}</div></div>
                 </div>
             </div>
