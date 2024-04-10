@@ -79,30 +79,18 @@ export default function DashBoard() {
             {
             flag && <>
             <div className='flex flex-wrap mt-5 '>
-                <div className='flex border-solid border-2 border-green-100 w-60 h-28 mr-2 rounded-md'>
-                    <div className='font-thin'>
-                        Temprature
-                        <div>
-                            {temp}
-                        </div>
-                    </div>   
+                <div className='flex border-solid border-2 border-gray-500 w-80 h-44 mr-2 rounded-md'>
+                    <div className='font-bold ml-1'>
+                        Temperature 
+                    <div className='font-thin ml-1 text-6xl mt-2'>{temp}</div> </div> 
                 </div>
-                <div className='border-solid border-2 border-green-100 w-60 h-28 mr-2 rounded-md'>
-                <div className='font-thin'>
-                        Turbidity
-                        <div>
-                            {turbidity}
-                        </div>
-                    </div>   
+                <div className='border-solid border-2 border-gray-500 w-80 h-44 mr-2 rounded-md'>
+                    <div className='font-bold ml-1'>Turbidity  
+                    <div className='font-thin ml-1 text-6xl mt-2'>{turbidity}</div></div>
                 </div>
-
-                <div className='border-solid border-2 border-green-100 w-60 h-28 rounded-md'>
-                   <div className='font-thin'>
-                        TDS
-                        <div>
-                            {tds}
-                        </div>
-                    </div>   
+                <div className='border-solid border-2 border-gray-500 w-80 h-44 mr-2 rounded-md'>
+                    <div className='font-bold ml-1'>TDS
+                    <div className='font-thin ml-1 text-6xl mt-2'>{tds}</div></div>
                 </div>
             </div>
             <br></br>
