@@ -8,7 +8,6 @@ export default function DashBoard() {
     const [tds,setTds]= useState(0);
     const [turbidity,setTurbidity]= useState(0);
 
-
     function loadCoolerData() {
         const floor = document.getElementById('floorSelect').value ;
         var coolerSelect = document.getElementById('coolerSelect');
@@ -37,9 +36,6 @@ export default function DashBoard() {
         setTemp(data.feeds[0].field1);
         setTurbidity(data.feeds[0].field2);
         setTds(data.feeds[0].field3);
-        console.log(data.feeds[0].field1);
-        console.log(data.feeds[0].field2);
-        console.log(data.feeds[0].field3);
     }, 3000);
 
     return () => clearInterval(interval);
@@ -56,9 +52,9 @@ export default function DashBoard() {
                     <img src="images/logo.png" alt="Logo" className="h-20 w-auto" />
                     <p className="text-3xl ml-2 text-center">Water Quality Monitoring</p>
                 </div>
-                <a href="#" className="text-2xl block m-3 ml-2 text-center mt-5"><i className="fas fa-home"></i> Home</a>
-                <a href="#" className="text-2xl block m-3 ml-2 text-center mt-5"><i className="fas fa-bell"></i> Alerts</a>
-                <a href="#" className="text-2xl block m-3 ml-2 text-center mt-5"><i className="fas fa-envelope"></i> Contact</a>
+                <a href="#" className="text-2xl block m-3 ml-2 text-center"><i className="fas fa-home"></i> Home</a>
+                <a href="#" className="text-2xl block m-3 ml-2 text-center"><i className="fas fa-bell"></i> Alerts</a>
+                <a href="#" className="text-2xl block m-3 ml-2 text-center"><i className="fas fa-envelope"></i> Contact</a>
             </div>
         </div>
         
