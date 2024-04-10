@@ -4,6 +4,10 @@ import { useEffect,useState } from 'react';
 
 export default function DashBoard() {
     const [flag,setflag] = useState(false);
+    const [temp,setTemp]= useState(0);
+    const [tds,setTds]= useState(0);
+    const [turbidity,setTurbidity]= useState(0);
+
 
     function loadCoolerData() {
         const floor = document.getElementById('floorSelect').value ;
@@ -30,10 +34,13 @@ export default function DashBoard() {
     const interval = setInterval(async () => {
         const response = await fetch('https://api.thingspeak.com/channels/2440815/feeds.json?api_key=E45MWGDEG7W6I3WR&results=1');
         const data=await response.json();
+        setTemp(data.feeds[0].field1);
+        setTurbidity(data.feeds[0].field2);
+        setTds(data.feeds[0].field3);
         console.log(data.feeds[0].field1);
         console.log(data.feeds[0].field2);
         console.log(data.feeds[0].field3);
-    }, 5000);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, []);
@@ -77,13 +84,17 @@ export default function DashBoard() {
             flag && <>
             <div className='flex flex-wrap mt-5 '>
                 <div className='flex border-solid border-2 border-gray-500 w-80 h-44 mr-2 rounded-md'>
-                    <div className='font-bold ml-1'>Temperature</div>   
+                    <div className='font-bold ml-1'>
+                        Temperature 
+                    <div className='font-thin ml-1 text-6xl mt-2'>{temp}</div> </div> 
                 </div>
                 <div className='border-solid border-2 border-gray-500 w-80 h-44 mr-2 rounded-md'>
-                    <div className='font-bold ml-1'>Turbidity</div>   
+                    <div className='font-bold ml-1'>Turbidity  
+                    <div className='font-thin ml-1 text-6xl mt-2'>{turbidity}</div></div>
                 </div>
-                <div className='border-solid border-2 border-gray-500 w-80 h-44 rounded-md'>
-                    <div className='font-bold ml-1'>TDS</div>   
+                <div className='border-solid border-2 border-gray-500 w-80 h-44 mr-2 rounded-md'>
+                    <div className='font-bold ml-1'>TDS
+                    <div className='font-thin ml-1 text-6xl mt-2'>{tds}</div></div>
                 </div>
             </div>
             <br></br>
