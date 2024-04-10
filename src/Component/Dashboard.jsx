@@ -33,10 +33,25 @@ export default function DashBoard() {
     const interval = setInterval(async () => {
         const response = await fetch('https://api.thingspeak.com/channels/2440815/feeds.json?api_key=E45MWGDEG7W6I3WR&results=1');
         const data=await response.json();
+        const tempContainer = document.getElementById('tempCnt');
         setTemp(data.feeds[0].field1);
         setTurbidity(data.feeds[0].field2);
         setTds(data.feeds[0].field3);
-    }, 3000);
+        
+        if(data.feeds[0].field1>=28){
+            if(tempContainer.classList.contains('border-green-600')){
+                tempContainer.classList.remove('border-green-600');
+            }
+            tempContainer.classList.add('border-red-600');
+        }else{
+            if(tempContainer.classList.contains('border-red-600')){
+                tempContainer.classList.remove('border-red-600');
+            }
+
+            tempContainer.classList.add('border-green-600');
+        }
+
+    }, 2000);
 
     return () => clearInterval(interval);
   }, []);
@@ -79,9 +94,9 @@ export default function DashBoard() {
             {
             flag && <>
             <div className='flex flex-wrap mt-5 '>
-                <div className='flex border-solid border-2 border-gray-500 w-80 h-44 mr-2 rounded-md'>
+                <div id="tempCnt" className='flex border-solid border-2 border-green-600 w-80 h-44 mr-2 rounded-md'>
                     <div className='font-bold ml-1'>
-                        Temperature 
+                        Temperature (°C)
                     <div className='font-thin ml-1 text-6xl mt-2'>{temp}</div> </div> 
                 </div>
                 <div className='border-solid border-2 border-gray-500 w-80 h-44 mr-2 rounded-md'>
